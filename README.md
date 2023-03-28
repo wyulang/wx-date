@@ -18,8 +18,12 @@
 
  《date-picker show="{{isDate}}"  value="2023-3-6"></date-picker》
  
+ 事件 change="changeDate"
+ 
+ changeDate 会返回 value 值， 如果为空，则为关闭事件
+ 
  说明  
- time ：出现时分秒选择器， 可以直接写 time 显示 叶分秒  也可以 time="hour" 只显示时  time="minute" 显示 时 分    
+ time ：出现时分秒选择器， 可以直接写 time 显示 时分秒  也可以 time="hour" 只显示时  time="minute" 显示 时 分    
  more :  more={{true}} 写法一    直一个 more 也是可以的 写法二   
  value 绑定值，开始值   
  end 绑定值，结束值  
