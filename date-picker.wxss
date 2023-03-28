@@ -1,0 +1,15 @@
+@import "./icon/iconfont.wxss";
+
+.cell {
+  width: 14.28%;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  overflow: hidden;
+}
+
+.back {
+  color: #ccc;
+}

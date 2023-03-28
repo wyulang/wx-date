@@ -1,0 +1,83 @@
+<!-- 
+  使用方法
+ <date show="{{isDate}}" limit=">2023-3-2" more time="minute" end="2023-3-22" value="2023-3-6"></date> 
+ <date show="{{isDate}}" limit="<2023-3-2" value="2023-3-6"></date> 
+ <date show="{{isDate}}" limit="2023-3-2&&2023-3-22" value="2023-3-6"></date> 
+ <date show="{{isDate}}" limit="2023-3-2||2023-3-22" value="2023-3-6"></date> 
+ <date show="{{isDate}}" limit="[2023-3-2,2023-3-22]" value="2023-3-6"></date> 
+ <date show="{{isDate}}"  value="2023-3-6"></date> 
+ 说明
+ time ：出现时分秒选择器， 可以直接写 time 显示 叶分秒  也可以 time="hour" 只显示时  time="minute" 显示 时 分 
+ more :  more={{true}} 写法一    直一个 more 也是可以的 写法二
+ value 绑定值，开始值
+ end 绑定值，结束值
+
+ limit：限制值 区间限制
+   1。当 2002-03-05&&2002-03-05  这个时间 区间 里的值可能选择
+   2。当 2002-03-05||2002-03-05  这个时间 之外 的值可能选择 
+   3。当 >2002-03-05  ">"这个号写前写后都可以， 大于这个日期的值可以选择
+   4。当 <2002-03-05  "<"这个号写前写后都可以， 小于这个日期的值可以选择
+   5。[2002-03-05,2002-03-05,2002-03-05]  指定时间可以选择
+ -->
+
+
+
+<view style="width: 100%; position: fixed;display: flex;flex-direction: column;top: 0;bottom: 0;z-index: 1000;">
+  <view bindtap="closeDate" style="flex:1;background:#00000080; position: relative;">
+    <image bindtap="closeDate" style="position: absolute; right: 30rpx ;top:30rpx; width: 60rpx; height: 60rpx;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAh1JREFUWEftVlFRQ0EM3DjAATigOCgKKAqgCgAFgIOigFYBOAAHtA7AAQ7CbCf35vre5XKvM53+8L6gc7ndbHKbCI78yZHx8U/AVUBVTwCcAzgDsBGR9ZhyqerE4r8t/rcUXyRgwW8GnuIWIvLQQkJVFwDusrMkcV1KYkDAMv8y8BUABt8COAWwFJF5jYSqLgHcAPjhebuH//OeCxHZUaJEYArgA8BKRAgMI/VpkrokMvANgGkCy36/FBHe030lAgR9BfAsIk/pZESiBG6lSBk/ApiLCFWpEmDzsAQDyTwSDjjvYS9QfmbNZmYJdprZa8LURDxM2bq69UlYKlStk11VqRwzZRzLSTIvInLf75/aM0zNFJHgnTk44wh4BeDd/u76qZmANV8LCR7dNpyVohmcgaEVZ/X1lICBs2x8QU2ZJyVCApES2SuZWfOGsldfgWcyNSUyr0gN59Z8VA/khz2TafUJL7GxJdhxuP6lkVmVSIQEapkb4LYJ91WiSqABnDXnVzWr2gBrMaKB7JZ5ajgSiMzKHWCRFUfgHNf86PcRiTYrtmWEw4jzfFKo7+CpNZgVyXGfiIeRqtbGsfvOAxIcTs3j2FtIQpPxSIxdSLiMJsk4jNJKxnkeOlwGxri0klHVQUndYWR9QE9n3dJXbKKSuRSWUoLPmpbSnqFwtDLz9Z5rOeOpBOPb13LPtw/xe2jFhwDdaxwfisjRFfgDYFGCMGiG5asAAAAASUVORK5CYII="></image>
+  </view>
+  <view style="height: 90rpx; width: 100%; background-color: #fff; display: flex;align-items: center;padding: 0 30rpx;">
+    <text bindtap="toYear" data-type="减" style="padding: 20rpx;" class="iconfont icon-arrow-double-left"></text>
+    <text bindtap="toMonth" data-type="减" style="padding: 20rpx;font-size: 32rpx;" class="iconfont icon-arrow-left-bold"></text>
+    <view style="flex:1;display: flex;align-items: center;justify-content: center;">
+      <picker mode="date" value="{{currYear}}-{{currMonth}}" bindchange="changeYearMonth" fields="month">
+        {{currYear}} 年 {{currMonth}} 月
+      </picker>
+    </view>
+    <text bindtap="toMonth" data-type="加" style="padding: 20rpx;font-size: 32rpx;" class="iconfont icon-arrow-right-bold"></text>
+    <text bindtap="toYear" data-type="加" style="padding: 20rpx;" class="iconfont icon-arrow-double-right"></text>
+  </view>
+  <view style="background-color: #fff;">
+    <view style="display: flex;align-items: center; border-bottom: 1px solid #eee;">
+      <view style="width: 14.28%; height: 80rpx; display: flex; align-items: center;justify-content: center; font-size: 28rpx;" wx:key="index" wx:for="{{week}}">{{item}}</view>
+    </view>
+    <view style="display: flex;align-items: center;flex-wrap: wrap; ">
+      <view class="cell " bindtap="onCell" data-item="{{item}}" wx:key="index" wx:for="{{path}}">
+        <!-- 禁止日期 -->
+        <text wx:if="{{item.disable}}" class="back">{{item.label}}</text>
+        <!-- 开始日期，第一个日期 -->
+        <view wx:elif="{{item.start==item.value}}" style="position: relative;">
+          <text style="background-color: #027AFF; z-index: 200; position: relative; height: 88rpx;width: 88rpx; display: flex;align-items: center;justify-content: center; border-radius: 100%; color: #fff;">{{item.label}}</text>
+          <text wx:if="{{more&&item.end}}" style="background-color: #f1f1f1;left: 40%; top: 0; bottom: 0; right: -50rpx; height: 88rpx; width: 100%; position: absolute; z-index: 100;"></text>
+        </view>
+
+        <!-- 结束日期 -->
+        <view wx:elif="{{more&&item.end==item.value}}" style="position: relative;">
+          <text style="background-color: #027AFF; z-index: 200; position: relative; height: 88rpx;width: 88rpx; display: flex;align-items: center;justify-content: center; border-radius: 100%; color: #fff;">{{item.label}}</text>
+          <text style="background-color: #f1f1f1;right: 40%; top: 0; bottom: 0; left: -50rpx; height: 88rpx; width: 100%; position: absolute; z-index: 100;"></text>
+        </view>
+
+        <!-- 当存在两个日期时，两个日期的交集值 -->
+        <text wx:elif="{{item.select}}" style="background-color: #f1f1f1; height: 88rpx;width: 100%; display: flex;align-items: center;justify-content: center;  color: #999;">{{item.label}}</text>
+
+        <!-- 正常日期 -->
+        <text wx:else>{{item.label}}</text>
+      </view>
+    </view>
+    <view style="width: 100%; height: 3rpx;background-color: #eee;"></view>
+    <view wx:if="{{time}}" style="height: 88rpx;display: flex;align-items: center;">
+      <picker mode="multiSelector" value="{{startTimeValue}}" range="{{timeList}}" bindchange="changeTimeStart">
+        <view style="align-items: center;display: flex; padding-left:30rpx;flex:1;margin-right: 18rpx;">
+          <text style="color: #888;">时间 :</text> <input value="{{startTime}}" style="height: 60rpx;border:3rpx #eee solid; width: 180rpx;border-radius: 8rpx;margin-left: 8rpx;text-align: center;" type="text" />
+        </view>
+      </picker>
+      <picker wx:if="{{more}}" mode="multiSelector" value="{{endTimeValue}}" range="{{timeList}}" bindchange="changeTimeEnd">
+        <view style="align-items: center;display: flex;flex:1">
+          <text style="color: #888;">至</text><input value="{{endTime}}" style="height: 60rpx;border:3rpx #eee solid; width: 180rpx;border-radius: 8rpx;margin-left: 18rpx;text-align: center;" type="text" />
+        </view>
+      </picker>
+      <view style="flex:1"></view>
+      <!-- <text style="border: solid #ddd 3rpx; padding:10rpx 20rpx;border-radius: 10rpx; margin-right: 30rpx;">确定</text> -->
+    </view>
+  </view>
+</view>
