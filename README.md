@@ -4,7 +4,7 @@
 
 # 使用方法
 
- #<date-picker show="{{isDate}}" limit=">2023-3-2" more time="minute" end="2023-3-22" value="2023-3-6"></date-picker> 
+ #date-picker show="{{isDate}}" limit=">2023-3-2" more time="minute" end="2023-3-22" value="2023-3-6"></date-picker
 
  #<date-picker show="{{isDate}}" limit=">2023-3-2" more time end="2023-3-22" value="2023-3-6"></date-picker> 
 
