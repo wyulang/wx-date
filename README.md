@@ -3,6 +3,7 @@
 
 
 # 使用方法
+
  <date-picker show="{{isDate}}" limit=">2023-3-2" more time="minute" end="2023-3-22" value="2023-3-6"></date-picker> 
 
  <date-picker show="{{isDate}}" limit=">2023-3-2" more time end="2023-3-22" value="2023-3-6"></date-picker> 
@@ -16,6 +17,7 @@
  <date-picker show="{{isDate}}" limit="[2023-3-2,2023-3-22]" value="2023-3-6"></date-picker> 
 
  <date-picker show="{{isDate}}"  value="2023-3-6"></date-picker> 
+ 
  说明
  time ：出现时分秒选择器， 可以直接写 time 显示 叶分秒  也可以 time="hour" 只显示时  time="minute" 显示 时 分 
  more :  more={{true}} 写法一    直一个 more 也是可以的 写法二
