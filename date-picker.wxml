@@ -30,8 +30,8 @@
     <text bindtap="toYear" data-type="减" style="padding: 20rpx;" class="iconfont icon-arrow-double-left"></text>
     <text bindtap="toMonth" data-type="减" style="padding: 20rpx;font-size: 32rpx;" class="iconfont icon-arrow-left-bold"></text>
     <view style="flex:1;display: flex;align-items: center;justify-content: center;">
-      <picker mode="date" value="{{currYear}}-{{currMonth}}" bindchange="changeYearMonth" fields="month">
-        {{currYear}} 年 {{currMonth}} 月
+      <picker mode="date" value="{{currYear}}-{{currMonth+1}}" bindchange="changeYearMonth" fields="month">
+        <view style="height: 70rpx;display: flex;align-items: center;justify-content: center;">{{currYear}} 年 {{currMonth+1}} 月</view>
       </picker>
     </view>
     <text bindtap="toMonth" data-type="加" style="padding: 20rpx;font-size: 32rpx;" class="iconfont icon-arrow-right-bold"></text>
@@ -68,12 +68,12 @@
     <view wx:if="{{time}}" style="height: 88rpx;display: flex;align-items: center;">
       <picker mode="multiSelector" value="{{startTimeValue}}" range="{{timeList}}" bindchange="changeTimeStart">
         <view style="align-items: center;display: flex; padding-left:30rpx;flex:1;margin-right: 18rpx;">
-          <text style="color: #888;">时间 :</text> <input value="{{startTime}}" style="height: 60rpx;border:3rpx #eee solid; width: 180rpx;border-radius: 8rpx;margin-left: 8rpx;text-align: center;" type="text" />
+          <text style="color: #888;">时间 :</text> <view style="height: 60rpx;border:3rpx #eee solid; width: 180rpx;border-radius: 8rpx;margin-left: 8rpx;text-align: center; display: flex;align-items: center; justify-content: center;" type="text" >{{startTime}}</view>
         </view>
       </picker>
       <picker wx:if="{{more}}" mode="multiSelector" value="{{endTimeValue}}" range="{{timeList}}" bindchange="changeTimeEnd">
         <view style="align-items: center;display: flex;flex:1">
-          <text style="color: #888;">至</text><input value="{{endTime}}" style="height: 60rpx;border:3rpx #eee solid; width: 180rpx;border-radius: 8rpx;margin-left: 18rpx;text-align: center;" type="text" />
+          <text style="color: #888;">至</text><view style="height: 60rpx;border:3rpx #eee solid; width: 180rpx;border-radius: 8rpx;margin-left: 8rpx;text-align: center; display: flex;align-items: center; justify-content: center;" type="text" >{{endTime}}</view>
         </view>
       </picker>
       <view style="flex:1"></view>

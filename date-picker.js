@@ -131,7 +131,7 @@ Component({
   data: {
     path: [],
     currYear: new Date().getFullYear(),
-    currMonth: new Date().getMonth() + 1,
+    currMonth: new Date().getMonth(),
     currDay: new Date().getDate(),
     selectDate: null,
     endDate: null,
@@ -250,7 +250,7 @@ Component({
     },
     initDate() {
       // 本月1号的时间对象
-      let currDate = new Date(this.data.currYear, this.data.currMonth - 1, 1);
+      let currDate = new Date(this.data.currYear, this.data.currMonth, 1);
       // 本月1号星期几
       let week = currDate.getDay();
       // 日历上第一行第一列的开始时间
@@ -268,7 +268,7 @@ Component({
             select = true;
           }
         }
-        let disable = time.toLocaleDateString().replace(/\/\d+$/g, '') != `${this.data.currYear}/${this.data.currMonth}`;
+        let disable = `${time.getFullYear()}-${time.getMonth()}` != `${this.data.currYear}-${this.data.currMonth}`;
         if (typeof this.properties.limit == "string" && !this.properties.limit.includes('[')) {
           if (this.properties.limit.includes('&&') && !disable) {
             let currStart = formatDate(this.properties.limit.split('&&')[0]);
@@ -368,7 +368,7 @@ Component({
     changeYearMonth(e) {
       this.setData({
         currYear: e.detail.value.split('-')[0],
-        currMonth: Number(e.detail.value.split('-')[1])
+        currMonth: Number(e.detail.value.split('-')[1])-1
       });
       this.initDate();
     },
@@ -390,9 +390,9 @@ Component({
     toMonth(e) {
       if (e.currentTarget.dataset.type == '加') {
         let month = Number(this.data.currMonth) + 1;
-        if (month > 12) {
+        if (month >= 11) {
           this.setData({
-            currMonth: 1,
+            currMonth: 0,
             currYear: Number(this.data.currYear) + 1
           })
         } else {
@@ -402,13 +402,13 @@ Component({
         }
       } else {
         let month = Number(this.data.currMonth) - 1;
-        if (month > 0) {
+        if (month >= 0) {
           this.setData({
             currMonth: month
           })
         } else {
           this.setData({
-            currMonth: 12,
+            currMonth: 11,
             currYear: Number(this.data.currYear) - 1
           })
         }
