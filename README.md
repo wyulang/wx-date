@@ -1,6 +1,7 @@
 # date-picker
 微信小程序自定义日期时间选择器，可限制时间范围，调整时间精度日期或时分秒，
 
+<<<<<<< HEAD
 # 使用方法
   使用方法
  <date-picker show="{{isDate}}" limit=">2023-3-2" more time="minute" end="2023-3-22" value="2023-3-6"></date-picker> 
@@ -36,3 +37,4 @@
 ![img](https://github.com/wyulang/wx-date/blob/main/demo-pic/wx2.png)
 
 ![img](https://github.com/wyulang/wx-date/blob/main/demo-pic/wx3.png)
+
