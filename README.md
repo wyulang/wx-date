@@ -43,9 +43,13 @@ e.detail={value:时间或开始时间,end:结束时间}
   
 
 
-![img](https://github.com/wyulang/wx-date/blob/main/demo-pic/wx1.png)
+![img](https://github.com/wyulang/wx-date/blob/main/demo-pic/date1.png)
 
-![img](https://github.com/wyulang/wx-date/blob/main/demo-pic/wx2.png)
+![img](https://github.com/wyulang/wx-date/blob/main/demo-pic/date3.png)
 
-![img](https://github.com/wyulang/wx-date/blob/main/demo-pic/wx3.png)
+![img](https://github.com/wyulang/wx-date/blob/main/demo-pic/date4.png)
+
+![img](https://github.com/wyulang/wx-date/blob/main/demo-pic/date5.png)
+
+![img](https://github.com/wyulang/wx-date/blob/main/demo-pic/date6.png)
 
