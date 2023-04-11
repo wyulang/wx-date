@@ -30,7 +30,14 @@
 
 
 列：\<date-picker limit="2002-03-05&&2002-03-05">
-<br>
+<br><br><br><br><br>
+
+# 返回值
+ change="changeDate"
+ changeDate(e){
+    e.detail={value:时间或开始时间,end:结束时间}
+    当value 值为空时，表示点击了 关闭按钮
+  }
 
 
 ![img](https://github.com/wyulang/wx-date/blob/main/demo-pic/wx1.png)
