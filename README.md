@@ -12,46 +12,20 @@
 | `value`       | [说明]：开始时间 ，日期选择期中默认选择的时间，如未传，默认选中当前时间                                                   |
 | `end` | [说明]：结束时间|
 | `time` | [说明]：时分秒显示，当为true--00:00:00、  当为hour--00 、当为minute -- 00:00|
+| `more` | [说明]：是否可以选择两个时间为，开始时间，与结果时间|
+| `button` | [说明]：是否显示确定按钮，当为true 显示文案为 “确定” 也可以自定义 button="关闭"|
+| `format` | [说明]：取值格式化 ，为为number时返加时间戳|
+| `message` | [说明]：当存在button时 未选择时间时提示文案，为true 提示时间未选择完， 也可自定义 message="请选择时间" |
+| `show` | [说明]：显示与关闭|
 | `end` | [说明]：结束时间|
-| `end` | [说明]：结束时间|
-| `end` | [说明]：结束时间|
-| `end` | [说明]：结束时间|
-| `end` | [说明]：结束时间|
-| `end` | [说明]：结束时间|
 
-# 使用方法
+# limit：限制值 区间限制 
+| `&&` | [说明]：2002-03-05&&2002-03-05  这两个时间 区间 里的值可以选择|
+| `||` | [说明]：2002-03-05||2002-03-05  这两个时间 之外 的值可以选择|
+| `>` | [说明]：当 >2002-03-05  ">"这个号写前写后都可以， 大于这个日期的值可以选择|
+| `<` | [说明]：当 <2002-03-05  "<"这个号写前写后都可以， 小于这个日期的值可以选择|
+| `[]` | [说明]：[2002-03-05,2002-03-05,2002-03-05]  指定时间可以选择|
 
- 《date-picker show="{{isDate}}" change="changeDate" limit=">2023-3-2" more time="minute" end="2023-3-22" value="2023-3-6"></date-picker》
-
- 《date-picker show="{{isDate}}" change="changeDate" limit=">2023-3-2" more time end="2023-3-22" value="2023-3-6"></date-picker》
-
- 《date-picker show="{{isDate}}" change="changeDate" limit="<2023-3-2" value="2023-3-6"></date-picker》
-
- 《date-picker show="{{isDate}}" change="changeDate" limit="2023-3-2&&2023-3-22" value="2023-3-6"></date-picker》
-
- 《date-picker show="{{isDate}}" change="changeDate" limit="2023-3-2||2023-3-22" value="2023-3-6"></date-picker》
-
- 《date-picker show="{{isDate}}" change="changeDate" limit="[2023-3-2,2023-3-22]" value="2023-3-6"></date-picker》 
-
- 《date-picker show="{{isDate}}" change="changeDate" value="2023-3-6"></date-picker》
- 
- 事件 change="changeDate"
- 
- changeDate 会返回 value 值， 如果为空，则为关闭事件
- 
- 说明  
- time ：出现时分秒选择器， 可以直接写 time 显示 时分秒  也可以 time="hour" 只显示时  time="minute" 显示 时 分    
- more :  more={{true}} 写法一    直一个 more 也是可以的 写法二   
- value 绑定值，开始值   
- end 绑定值，结束值  
-
- limit：限制值 区间限制  
-   1。 &&  当 2002-03-05&&2002-03-05  这两个时间 区间 里的值可以选择  
-   2。||  当 2002-03-05||2002-03-05  这两个时间 之外 的值可以选择   
-   3。>  当 >2002-03-05  ">"这个号写前写后都可以， 大于这个日期的值可以选择  
-   4。< 当 <2002-03-05  "<"这个号写前写后都可以， 小于这个日期的值可以选择  
-   5。[] [2002-03-05,2002-03-05,2002-03-05]  指定时间可以选择  
- -->
 
 
 ![img](https://github.com/wyulang/wx-date/blob/main/demo-pic/wx1.png)
