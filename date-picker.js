@@ -98,10 +98,20 @@ Component({
       type: Boolean,
       value: false
     },
+    // 是否可以选择两个时间，开始时间，与结果时间
+    button: {
+      type: [Boolean, String],
+      value: false
+    },
     // timestamp或number 时间戳，string:'yyyy-MM-dd hh:mm:ss'  返回的绑定值格式
     format: {
       type: String,
       value: "yyyy-MM-dd"
+    },
+    //错误提示语
+    message: {
+      type: [Boolean, String],
+      value: ""
     },
     // 是否显示
     show: {
@@ -330,37 +340,32 @@ Component({
             endDate: "",
           })
         } else {
-          if (this.data.selectDate > item.value) {
+          if (!this.data.selectDate) {
+            this.setData({
+              selectDate: item.value,
+            })
+          }
+          else if (this.data.selectDate > item.value) {
             this.setData({
               selectDate: item.value,
               endDate: this.data.selectDate,
             })
-          } else {
-            this.setData({ endDate: item.value })
-          }
-          if (this.properties.time) {
-            if (this.data.startTime && this.data.endTime) {
-              this.triggerEvent('change', { value: formatDate(this.data.selectDate + ' ' + this.data.startTime, this.properties.format), end: formatDate(this.data.endDate + ' ' + this.data.endTime, this.properties.format) })
-            } else {
-              wx.showToast({ title: '时间未选择', icon: "none", mask: true, duration: 6000 })
+            if (!this.properties.button) {
+              this.btnOk()
             }
           } else {
-            this.triggerEvent('change', { value: formatDate(this.data.selectDate, this.properties.format), end: formatDate(this.data.endDate, this.properties.format) })
+            this.setData({ endDate: item.value })
+            if (!this.properties.button) {
+              this.btnOk()
+            }
           }
         }
       } else {
         this.setData({
           selectDate: item.value
         })
-        if (this.properties.time) {
-          let values = item.value + ' ' + this.data.startTime;
-          if(this.data.startTime){
-            this.triggerEvent('change', { value: formatDate(values, this.properties.format) })
-          }else{
-            wx.showToast({ title: '时间未选择', icon: "none", mask: true, duration: 6000 })
-          }
-        } else {
-          this.triggerEvent('change', { value: formatDate(item.date, this.properties.format) })
+        if (!this.properties.button) {
+          this.btnOk()
         }
       }
       this.initDate()
@@ -368,7 +373,7 @@ Component({
     changeYearMonth(e) {
       this.setData({
         currYear: e.detail.value.split('-')[0],
-        currMonth: Number(e.detail.value.split('-')[1])-1
+        currMonth: Number(e.detail.value.split('-')[1]) - 1
       });
       this.initDate();
     },
@@ -386,6 +391,37 @@ Component({
         })
       }
       this.initDate()
+    },
+    btnOk() {
+      if (this.properties.more) {
+        if (this.properties.time) {
+          if (!this.data.startTimeValue && !this.data.endTimeValue && !this.data.selectDate && !this.data.endDate) {
+            this.properties.message && wx.showToast({ title: this.properties.message === true ? '时间未选择完' : this.properties.message, icon: "none", mask: true, duration: 6000 })
+          } else {
+            this.triggerEvent('change', { value: formatDate(this.data.selectDate + ' ' + this.data.startTime, this.properties.format), end: formatDate(this.data.endDate + ' ' + this.data.endTime, this.properties.format) })
+          }
+        } else {
+          if (!this.data.selectDate && !this.data.endDate) {
+            this.properties.message && wx.showToast({ title: this.properties.message === true ? '时间未选择完' : this.properties.message, icon: "none", mask: true, duration: 6000 })
+          } else {
+            this.triggerEvent('change', { value: formatDate(this.data.selectDate, this.properties.format), end: formatDate(this.data.endDate, this.properties.format) })
+          }
+        }
+      } else {
+        if (this.properties.time) {
+          if (!this.data.startTimeValue && !this.data.selectDate) {
+            wx.showToast({ title: '时间未选择完', icon: "none", mask: true, duration: 6000 })
+          } else {
+            this.triggerEvent('change', { value: formatDate(this.data.selectDate + ' ' + this.data.startTime, this.properties.format) })
+          }
+        } else {
+          if (!this.data.selectDate) {
+            wx.showToast({ title: '时间未选择完', icon: "none", mask: true, duration: 6000 })
+          } else {
+            this.triggerEvent('change', { value: formatDate(this.data.selectDate, this.properties.format) })
+          }
+        }
+      }
     },
     toMonth(e) {
       if (e.currentTarget.dataset.type == '加') {
