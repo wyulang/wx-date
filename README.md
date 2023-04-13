@@ -33,11 +33,13 @@
 <br><br>
 
 # 返回值
- change="changeDate"
+ change="changeDa"
  
 e.detail={value:时间或开始时间,end:结束时间}
 <br>
 当value 值为空时，表示点击了 关闭按钮
+
+关闭事件：在触发changeDate时，根据需要业务端关闭
 
 <br><br><br>
   
